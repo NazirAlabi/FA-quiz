@@ -80,9 +80,13 @@ function showReview() {
             </tr>
         `;
     }).join("");
-
-    tableBody.innerHTML = rows;
-}
+    if (window.innerWidth < 480) {
+         quizComplete.style.display = "block";
+         reviewBtn.style.display = "none";       
+    } else {
+        tableBody.innerHTML = rows;
+    }
+};
 
 
 reviewBtn.onclick = () => {

@@ -84,6 +84,11 @@ submitBtn.onclick = () => {
 
 
 
+document.onkeydown = (e) => {
+    if (e.key === "Enter" || e.key === "NumpadEnter" || e.key === "ArrowRight") submitBtn.click();
+};
+
+
 // Initialize
 displayQuestion();
 timer();
