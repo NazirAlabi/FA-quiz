@@ -191,8 +191,20 @@
   }
 }
 @layer utilities {
+  .visible {
+    visibility: visible;
+  }
+  .absolute {
+    position: absolute;
+  }
+  .fixed {
+    position: fixed;
+  }
   .block {
     display: block;
+  }
+  .contents {
+    display: contents;
   }
   .w-full {
     width: 100%;
@@ -235,32 +247,41 @@
   align-items: center;
   justify-content: space-around;
   background-color: var(--color-main-bg);
-  padding: calc(var(--spacing) * 6);
+  padding: calc(var(--spacing) * 3);
   font-family: var(--font-sans);
   text-wrap: wrap;
   color: var(--color-text-main);
+  @media (width >= 48rem) {
+    padding: calc(var(--spacing) * 6);
+  }
 }
 .mainCard {
-  gap: calc(var(--spacing) * 6);
+  gap: calc(var(--spacing) * 3);
   border-radius: var(--radius-lg);
   border-style: var(--tw-border-style);
   border-width: 1px;
   border-color: var(--color-border-glass);
   background-color: var(--color-main-card-bg);
-  padding: calc(var(--spacing) * 6);
+  padding: calc(var(--spacing) * 3);
+  @media (width >= 48rem) {
+    gap: calc(var(--spacing) * 6);
+  }
+  @media (width >= 48rem) {
+    padding: calc(var(--spacing) * 6);
+  }
 }
 .selection {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  gap: calc(var(--spacing) * 6);
+  gap: calc(var(--spacing) * 3);
   border-radius: var(--radius-lg);
   border-style: var(--tw-border-style);
   border-width: 1px;
   border-color: var(--color-border-glass);
   background-color: var(--color-opt-bg);
-  padding: calc(var(--spacing) * 6);
+  padding: calc(var(--spacing) * 3);
   color: var(--color-text-muted);
   transition-property: all;
   transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
@@ -299,6 +320,12 @@
       box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
     }
   }
+  @media (width >= 48rem) {
+    gap: calc(var(--spacing) * 6);
+  }
+  @media (width >= 48rem) {
+    padding: calc(var(--spacing) * 6);
+  }
 }
 .selection.selected {
   background-color: var(--color-accent-blue);
@@ -312,7 +339,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: calc(var(--spacing) * 2);
+  gap: calc(var(--spacing) * 1);
   border-radius: calc(infinity * 1px);
   border-style: var(--tw-border-style);
   border-width: 1px;
@@ -321,7 +348,7 @@
     border-color: color-mix(in oklab, var(--color-border-blue) 50%, transparent);
   }
   background-color: var(--color-accent-blue);
-  padding: calc(var(--spacing) * 6);
+  padding: calc(var(--spacing) * 3);
   color: var(--color-text-main);
   transition-property: all;
   transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
@@ -348,12 +375,24 @@
     }
   }
   &:active {
-    --tw-translate-y: calc(var(--spacing) * 0);
+    --tw-translate-y: calc(var(--spacing) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   &:active {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  @media (width >= 48rem) {
+    gap: calc(var(--spacing) * 2);
+  }
+  @media (width >= 48rem) {
+    padding: calc(var(--spacing) * 6);
+  }
+  @media (width >= 48rem) {
+    &:active {
+      --tw-translate-y: calc(var(--spacing) * 0);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
   }
 }
 .action:disabled {
@@ -364,50 +403,87 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: calc(var(--spacing) * 6);
+  gap: calc(var(--spacing) * 3);
+  @media (width >= 48rem) {
+    gap: calc(var(--spacing) * 6);
+  }
 }
 h1 {
-  font-size: var(--text-4xl);
-  line-height: var(--tw-leading, var(--text-4xl--line-height));
-  --tw-font-weight: var(--font-weight-bold);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-main);
-}
-h2 {
   font-size: var(--text-2xl);
   line-height: var(--tw-leading, var(--text-2xl--line-height));
   --tw-font-weight: var(--font-weight-bold);
   font-weight: var(--font-weight-bold);
+  color: var(--color-text-main);
+  @media (width >= 48rem) {
+    font-size: var(--text-4xl);
+    line-height: var(--tw-leading, var(--text-4xl--line-height));
+  }
+}
+h2 {
+  font-size: var(--text-xl);
+  line-height: var(--tw-leading, var(--text-xl--line-height));
+  --tw-font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-bold);
   color: var(--color-text-muted);
+  @media (width >= 48rem) {
+    font-size: var(--text-3xl);
+    line-height: var(--tw-leading, var(--text-3xl--line-height));
+  }
 }
 .question-sets {
   display: flex;
-  min-width: calc(1/3 * 100%);
+  width: 100vw;
   flex-direction: row;
   align-items: center;
   gap: calc(var(--spacing) * 4);
   padding: calc(var(--spacing) * 4);
+  @media (width >= 48rem) {
+    width: calc(1/2 * 100%);
+  }
 }
 .question-set-btn {
-  height: calc(var(--spacing) * 50);
-  width: calc(var(--spacing) * 50);
+  width: calc(var(--spacing) * 2);
   border-radius: calc(infinity * 1px);
-  font-size: var(--text-2xl);
-  line-height: var(--tw-leading, var(--text-2xl--line-height));
+  font-size: var(--text-xl);
+  line-height: var(--tw-leading, var(--text-xl--line-height));
+  @media (width >= 48rem) {
+    aspect-ratio: 1 / 1;
+  }
+  @media (width >= 48rem) {
+    width: calc(var(--spacing) * 50);
+  }
+  @media (width >= 48rem) {
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
+  }
 }
 .heading-bar-quiz {
   position: absolute;
-  top: calc(var(--spacing) * 4);
+  top: calc(var(--spacing) * 2);
   width: 100vw;
-  padding: calc(var(--spacing) * 4);
+  padding: calc(var(--spacing) * 2);
+  @media (width >= 48rem) {
+    top: calc(var(--spacing) * 4);
+  }
+  @media (width >= 48rem) {
+    padding: calc(var(--spacing) * 4);
+  }
 }
 .quiz-container {
   display: grid;
   min-height: 75vh;
-  max-width: calc(3/5 * 100%);
-  min-width: calc(1/2 * 100%);
-  grid-template-rows: 60px auto 60px;
+  width: 100vw;
+  grid-template-rows: 20px auto 20px;
   text-wrap: wrap;
+  @media (width >= 48rem) {
+    width: calc(1/2 * 100%);
+  }
+  @media (width >= 48rem) {
+    max-width: calc(3/5 * 100%);
+  }
+  @media (width >= 48rem) {
+    grid-template-rows: 60px auto 60px;
+  }
 }
 .quiz-container > div {
   display: flex;
@@ -424,15 +500,25 @@ h2 {
   @supports (color: color-mix(in lab, red, red)) {
     background-color: color-mix(in oklab, var(--color-main-bg) 30%, transparent);
   }
-  padding-inline: calc(var(--spacing) * 10);
-  padding-block: calc(var(--spacing) * 3);
-  font-size: var(--text-2xl);
-  line-height: var(--tw-leading, var(--text-2xl--line-height));
+  padding-inline: calc(var(--spacing) * 5);
+  padding-block: calc(var(--spacing) * 2);
+  font-size: var(--text-xl);
+  line-height: var(--tw-leading, var(--text-xl--line-height));
   --tw-font-weight: var(--font-weight-bold);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-main);
   --tw-shadow: 0 0 15px var(--tw-shadow-color, rgba(59, 130, 246, 0.4));
   box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  @media (width >= 48rem) {
+    padding-inline: calc(var(--spacing) * 10);
+  }
+  @media (width >= 48rem) {
+    padding-block: calc(var(--spacing) * 3);
+  }
+  @media (width >= 48rem) {
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
+  }
 }
 .timer-box.critical {
   color: var(--color-text-critical);
@@ -441,8 +527,11 @@ h2 {
   display: grid;
   min-height: 50vh;
   grid-template-rows: repeat(2, minmax(0, 1fr));
-  gap: calc(var(--spacing) * 4);
+  gap: calc(var(--spacing) * 2);
   padding: calc(var(--spacing) * 3);
+  @media (width >= 48rem) {
+    gap: calc(var(--spacing) * 4);
+  }
 }
 .question {
   display: flex;
@@ -450,19 +539,31 @@ h2 {
   width: 100%;
   align-items: center;
   justify-content: center;
-  font-size: var(--text-2xl);
-  line-height: var(--tw-leading, var(--text-2xl--line-height));
+  font-size: var(--text-xl);
+  line-height: var(--tw-leading, var(--text-xl--line-height));
   --tw-font-weight: var(--font-weight-semibold);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-main);
+  @media (width >= 48rem) {
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
+  }
 }
 .options {
-  display: grid;
   height: 100%;
   width: 100%;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-rows: repeat(2, minmax(0, 1fr));
-  gap: calc(var(--spacing) * 4);
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  gap: calc(var(--spacing) * 2);
+  @media (width >= 48rem) {
+    display: grid;
+  }
+  @media (width >= 48rem) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (width >= 48rem) {
+    gap: calc(var(--spacing) * 4);
+  }
 }
 .options > button {
   border-radius: var(--radius-xl);
@@ -471,7 +572,10 @@ h2 {
 }
 .submit {
   aspect-ratio: 3/1;
-  padding: calc(var(--spacing) * 4);
+  padding: calc(var(--spacing) * 2);
+  @media (width >= 48rem) {
+    padding: calc(var(--spacing) * 4);
+  }
 }
 .quiz-complete {
   display: flex;
@@ -482,9 +586,8 @@ h2 {
 }
 #finishBtn {
   position: absolute;
-  right: calc(var(--spacing) * 4);
   bottom: calc(var(--spacing) * 4);
-  width: calc(var(--spacing) * 50);
+  width: calc(var(--spacing) * 15);
   border-style: var(--tw-border-style);
   border-width: 1px;
   border-color: var(--color-border-glass);
@@ -505,6 +608,15 @@ h2 {
     @media (hover: hover) {
       background-color: var(--color-main-card-bg);
     }
+  }
+  @media (width >= 48rem) {
+    right: calc(var(--spacing) * 4);
+  }
+  @media (width >= 48rem) {
+    bottom: calc(var(--spacing) * 4);
+  }
+  @media (width >= 48rem) {
+    width: calc(var(--spacing) * 50);
   }
 }
 .toggleBtn {
@@ -540,8 +652,14 @@ h2 {
   color: var(--color-text-main);
 }
 #reviewBtn {
-  height: calc(var(--spacing) * 15);
-  width: calc(var(--spacing) * 40);
+  height: calc(var(--spacing) * 8);
+  width: calc(var(--spacing) * 10);
+  @media (width >= 48rem) {
+    height: calc(var(--spacing) * 15);
+  }
+  @media (width >= 48rem) {
+    width: calc(var(--spacing) * 40);
+  }
 }
 .review-card {
   display: flex;
