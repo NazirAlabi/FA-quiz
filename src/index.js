@@ -5,10 +5,10 @@ const setBtns = document.querySelectorAll('.question-set-btn');
 const startBtn = document.getElementById('startQuiz');
 
 // Import question sets
-import { set1 } from './data/set1.js';
-import { set2 } from './data/set2.js';
-import { set3 } from './data/set3.js';
-import { set4 } from './data/set4.js';
+import { set1 } from '../data/set1.js';
+import { set2 } from '../data/set2.js';
+import { set3 } from '../data/set3.js';
+import { set4 } from '../data/set4.js';
 
 const questionSets = [set1, set2, set3, set4];
 
