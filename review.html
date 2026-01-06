@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" initial-scale= 1.0 />
+        <title>FA Practice</title>
+        <link rel="stylesheet" href="./src/output.css">
+    </head>
+    <body>
+        <div class="page">
+            <div class="mainCard quiz-complete">
+                <h1>Quiz Complete</h1>
+                <h2>Score:</h2>
+                <button id="scoreToggle" class="results"><span id="score">0</span> / <span id="total">0</span></button>
+                <button id="percentToggle" class="toggleBtn results">%</button>
+                <button id="reviewBtn" class="action">
+                    Review Answers
+                </button>
+            </div>
+            <div class="mainCard review-card" style="display: none;">
+                <div class="w-full text-center underline"><h1>Quiz Review</h1></div>
+                <table id="review-table" class="review-table">
+                    <thead>
+                        <tr>
+                            <th class="text-left">Question</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-left">Correct Answer</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+                <button id="backBtn" class="action">
+                    Hide Review
+                </button>
+
+            </div>
+            <button id="endQuiz" class="action">
+                End Quiz
+            </button>
+        </div>
+    </body>
+    <script src="./review.js"></script>
+</html>

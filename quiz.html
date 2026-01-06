@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" initial-scale= 1.0 />
+        <title>FA Practice</title>
+        <link rel="stylesheet" href="./src/output.css">
+    </head>
+    <body>
+        <div class="page">
+            <div class="heading-bar-quiz">
+                <h2 class="text-3xl">Financial Accounting</h2>
+            </div>
+            <div class="mainCard quiz-container">
+                <div>
+                    <div id="timer" class="timer-box">
+                        <span id="time">20:00</span>
+                    </div>
+                </div>
+                <div class="quiz">
+                    <div class="question" id="question">
+                        Which of the following best defines depreciation?
+                    </div>
+                    <div class="options">
+                        <button class="selection">Allocation of asset cost over its useful life</button>
+                        <button class="selection">Asset valuation at fair value</button>
+                        <button class="selection">Cash paid to replace an asset</button>
+                        <button class="selection">Increase in market value of an asset</button>
+                    </div>
+                </div>
+                <div>
+                    <button id="submit" class="submit action" type="button" disabled>
+                        Next
+                    </button>
+                </div>
+            </div>
+            <button id="endQuiz" class="action">
+                End Quiz
+            </button>
+        </div>
+    </body>
+    <script src="./quiz.js"></script>
+</html>
