@@ -3,6 +3,7 @@ const totalEl = document.getElementById("total");
 const percentToggle = document.getElementById("percentToggle");
 const scoreToggle = document.getElementById("scoreToggle"); 
 const reviewBtn = document.getElementById("reviewBtn");
+const hideReviewBtn = document.getElementById("hideReviewBtn");
 const quizComplete = document.querySelector(".quiz-complete");
 const reviewCard = document.querySelector(".review-card");
 const tableBody = document.getElementById("tableBody");
@@ -79,21 +80,26 @@ function showReview() {
                 </td>
             </tr>
         `;
-    }).join("");
-    if (window.innerWidth < 480) {
-         quizComplete.style.display = "block";
-         reviewBtn.style.display = "none";       
-    } else {
-        tableBody.innerHTML = rows;
-    }
+    }).join("");      
+    tableBody.innerHTML = rows;
+
 };
 
+if (window.innerWidth < 480) {
+    reviewBtn.style.display = "none"
+}
 
 reviewBtn.onclick = () => {
     quizComplete.style.display = "none";
     reviewCard.style.display = "block";
     showReview();
+
 };
+
+hideReviewBtn.onclick = () => {
+    quizComplete.style.display = "flex";
+    reviewCard.style.display = "none";
+}
 
 const endQuiz = document.getElementById("endQuiz");
 endQuiz.onclick = () => {

@@ -7,6 +7,16 @@
         <link rel="stylesheet" href="./src/output.css">
     </head>
     <body>
+        <svg class="bg-svg" width="1440" height="676" viewBox="0 0 1440 676" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="-92" y="-948" width="1624" height="1624" rx="812" fill="url(#a)"></rect>
+            <defs>
+                <radialGradient id="a" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+                    gradientTransform="rotate(90 428 292)scale(812)">
+                    <stop offset=".63" stop-color="#372AAC" stop-opacity="0"></stop>
+                    <stop offset="1" stop-color="#372AAC"></stop>
+                </radialGradient>
+            </defs>
+        </svg>
         <div class="page">
             <div class="heading-bar-quiz">
                 <h2 class="text-3xl">Financial Accounting</h2>
@@ -14,12 +24,14 @@
             <div class="mainCard quiz-container">
                 <div>
                     <div id="timer" class="timer-box">
-                        <span id="time">20:00</span>
+                        <span id="time"><i>Time</i></span>
                     </div>
                 </div>
                 <div class="quiz">
-                    <div class="question" id="question">
-                        Which of the following best defines depreciation?
+                    <div class="question">
+                        <span id="questionNum">Q1</span>
+                        <hr/>
+                        <span id="question">Which of the following best defines depreciation?</span>
                     </div>
                     <div class="options">
                         <button class="selection">Allocation of asset cost over its useful life</button>

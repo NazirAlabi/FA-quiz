@@ -1,12 +1,15 @@
 // Load questions
 const questionset = JSON.parse(localStorage.getItem('activeQuestions'));
-const questionEl = document.getElementById('question'); // <div id="question">
-const optionBtns = document.querySelectorAll('.selection'); // your option buttons
+const questionEl = document.getElementById('question');
+const questionNum = document.getElementById('questionNum');
+const optionBtns = document.querySelectorAll('.selection');
 const submitBtn = document.getElementById('submit');
 const questionCount = questionset.length;
-let totalTime = questionCount * 60; // 1min per question
+let timePerQuestion = 30 ; // seconds per question
+let totalTime = questionCount * timePerQuestion; // 1min per question
 const timerBox = document.querySelector(".timer-box");
-let criticalTime = Math.floor(0.25 * questionCount * 60);
+const timeDisplay = document.getElementById('time')
+let criticalTime = Math.floor(0.25 * questionCount * timePerQuestion);
 
 if (!questionset) {
     alert("No quiz selected! Please go back and select a set.");
@@ -22,7 +25,6 @@ function timer() {
     const timerInterval = setInterval(() => {
         const minutes = Math.floor(totalTime / 60);
         const seconds = totalTime % 60;
-    
         timeDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
     
         if (totalTime <= criticalTime) {
@@ -48,8 +50,8 @@ function handleTimeUp() {
 // Display a question
 function displayQuestion() {
     const q = questionset[currentIndex];
+    questionNum.textContent = ` Q${currentIndex + 1}.`;
     questionEl.textContent = q.question;
-
     optionBtns.forEach((btn, i) => {
         btn.textContent = q.options[i];
         btn.classList.remove('selected');
@@ -68,9 +70,10 @@ function displayQuestion() {
 // Handle submit
 submitBtn.onclick = () => {
     if (selectedAnswer === null) return;
-
+    
     questionset[currentIndex].selectedAnswer = selectedAnswer;
     selectedAnswer = null;
+    optionBtns.forEach(b => b.classList.remove('selected'));
 
     currentIndex++;
     if (currentIndex < questionset.length) {
@@ -81,8 +84,6 @@ submitBtn.onclick = () => {
         window.location.href = 'review.html';
     }
 };
-
-
 
 document.onkeydown = (e) => {
     if (e.key === "Enter" || e.key === "NumpadEnter" || e.key === "ArrowRight") submitBtn.click();
