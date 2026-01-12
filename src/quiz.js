@@ -17,6 +17,10 @@ if (!questionset) {
     window.location.href = 'index.html';
 }
 
+if (visualViewport) {
+    notify("Quiz Started!");
+}
+
 // State
 let currentIndex = 0;
 let selectedAnswer = null;
