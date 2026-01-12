@@ -1,4 +1,5 @@
 // Load questions
+const notifyDiv = document.getElementById('notifyDiv')
 const questionset = JSON.parse(localStorage.getItem('activeQuestions'));
 const questionEl = document.getElementById('question');
 const questionNum = document.getElementById('questionNum');
@@ -43,8 +44,12 @@ function timer() {
 // Handle Time Up
 function handleTimeUp() {
     localStorage.setItem('activeQuestions', JSON.stringify(questionset));
-    alert("Time's up!");
+    notify("Time's up!")
     window.location.href = 'review.html';
+}
+
+async function notify(str) {
+    notifyDiv.innerText = str
 }
 
 // Display a question
