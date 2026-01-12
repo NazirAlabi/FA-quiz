@@ -17,9 +17,9 @@ if (!questionset) {
     window.location.href = 'index.html';
 }
 
-if (visualViewport) {
-    notify("Quiz Started!");
-}
+// if (visualViewport) {
+//     notify("Quiz Started!");
+// }
 
 // State
 let currentIndex = 0;
@@ -48,7 +48,7 @@ function timer() {
 // Handle Time Up
 function handleTimeUp() {
     localStorage.setItem('activeQuestions', JSON.stringify(questionset));
-    notify("Time's up!")
+    // notify("Time's up!")
     window.location.href = 'review.html';
 }
 
