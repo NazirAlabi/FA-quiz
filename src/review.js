@@ -91,7 +91,7 @@ function createMobileReviewAccordion(questions) {
         content.style.display = "none";
 
         let contentHTML = `
-            <p class="question">${q.question}</p>
+            <p class="question-mobile-review">${q.question}</p>
             <br><hr><br>
             <p class="ans">${q.options[q.answer]}</p>
         `;
