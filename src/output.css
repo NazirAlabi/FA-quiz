@@ -10,6 +10,7 @@
     --color-red-600: oklch(57.7% 0.245 27.325);
     --color-green-600: oklch(62.7% 0.194 149.214);
     --color-gray-500: oklch(55.1% 0.027 264.364);
+    --color-white: #fff;
     --spacing: 0.25rem;
     --text-xl: 1.25rem;
     --text-xl--line-height: calc(1.75 / 1.25);
@@ -237,16 +238,6 @@
   .w-full {
     width: 100%;
   }
-  .border-collapse {
-    border-collapse: collapse;
-  }
-  .resize {
-    resize: both;
-  }
-  .border {
-    border-style: var(--tw-border-style);
-    border-width: 1px;
-  }
   .border-b {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
@@ -277,9 +268,6 @@
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
   }
-  .text-wrap {
-    text-wrap: wrap;
-  }
   .text-gray-500 {
     color: var(--color-gray-500);
   }
@@ -291,10 +279,6 @@
   }
   .underline {
     text-decoration-line: underline;
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
   }
 }
 body {
@@ -325,6 +309,11 @@ body {
   @media (width >= 48rem) {
     padding: calc(var(--spacing) * 6);
   }
+}
+.boda {
+  border-style: var(--tw-border-style);
+  border-width: 4px;
+  border-color: var(--color-white);
 }
 .page {
   position: relative;
@@ -368,6 +357,11 @@ body {
   @media (width >= 48rem) {
     margin-top: calc(var(--spacing) * 0);
   }
+}
+.help {
+  font-size: var(--text-xl);
+  line-height: var(--tw-leading, var(--text-xl--line-height));
+  color: var(--color-text-muted);
 }
 .mainCard {
   gap: calc(var(--spacing) * 3);
@@ -584,7 +578,9 @@ h2 {
   top: calc(var(--spacing) * 1);
   margin-top: calc(var(--spacing) * 4);
   margin-bottom: calc(var(--spacing) * 2);
+  display: flex;
   width: 100vw;
+  justify-content: space-between;
   padding: calc(var(--spacing) * 2);
   text-align: center;
   @media (width >= 48rem) {
@@ -925,7 +921,7 @@ h2 {
   max-height: 0;
   overflow: hidden;
 }
-.question {
+.question-mobile-review {
   text-align: left;
   font-size: 1rem;
   --tw-font-weight: var(--font-weight-semibold);
@@ -954,11 +950,6 @@ h2 {
 @property --tw-font-weight {
   syntax: "*";
   inherits: false;
-}
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
 }
 @property --tw-duration {
   syntax: "*";
@@ -1078,7 +1069,6 @@ h2 {
     *, ::before, ::after, ::backdrop {
       --tw-border-style: solid;
       --tw-font-weight: initial;
-      --tw-outline-style: solid;
       --tw-duration: initial;
       --tw-ease: initial;
       --tw-translate-x: 0;
