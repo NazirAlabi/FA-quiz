@@ -11,6 +11,7 @@ import { set3 } from '../data/set3.js';
 import { set4 } from '../data/set4.js';
 
 const questionSets = [set1, set2, set3, set4];
+localStorage.removeItem('progressSet');
 
 // Shuffle function
 function shuffle(array) {

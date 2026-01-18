@@ -11,6 +11,8 @@ const reviewTable = document.getElementById("review-table");
 
 const questions = JSON.parse(localStorage.getItem('activeQuestions'));
 
+localStorage.removeItem('progressSet');
+
 if (!questions) {
     window.location.href = 'index.html';
 }

@@ -17,16 +17,36 @@ if (!questionset) {
     window.location.href = 'index.html';
 }
 
+let progressSet = JSON.parse (localStorage.getItem('progressSet'));
+if (!progressSet) {
+    progressSet = {
+        time: null ,
+        questionIndex: 0 
+    }
+    localStorage.setItem('progressSet', JSON.stringify(progressSet))
+}
+console.log(progressSet);
+
+function saveprogress(timeleft, questionNum) {
+    progressSet.time = timeleft;
+    progressSet.questionIndex = questionNum;
+    localStorage.setItem('progressSet', JSON.stringify(progressSet))
+}
+
+
 // if (visualViewport) {
 //     notify("Quiz Started!");
 // }
 
 // State
-let currentIndex = 0;
+let currentIndex = progressSet.questionIndex;
 let selectedAnswer = null;
 
 // Timer
 function timer() {
+    if (typeof progressSet.time === "number" && progressSet.time > 0) {
+        totalTime = progressSet.time;
+    }
     const timerInterval = setInterval(() => {
         const minutes = Math.floor(totalTime / 60);
         const seconds = totalTime % 60;
@@ -47,9 +67,9 @@ function timer() {
 
 // Handle Time Up
 function handleTimeUp() {
-    localStorage.setItem('activeQuestions', JSON.stringify(questionset));
     // notify("Time's up!")
     window.location.href = 'review.html';
+    localStorage.removeItem('progressSet');
 }
 
 async function notify(str) {
@@ -61,6 +81,14 @@ function displayQuestion() {
     const q = questionset[currentIndex];
     questionNum.textContent = ` Q${currentIndex + 1}.`;
     questionEl.textContent = q.question;
+
+    const saved = q.selectedAnswer;
+    if (saved !== null && saved !== undefined) {
+        optionBtns[saved].classList.add('selected');
+        selectedAnswer = saved;
+        submitBtn.disabled = false;
+    }
+
     optionBtns.forEach((btn, i) => {
         btn.textContent = q.options[i];
         btn.classList.remove('selected');
@@ -81,16 +109,20 @@ submitBtn.onclick = () => {
     if (selectedAnswer === null) return;
     
     questionset[currentIndex].selectedAnswer = selectedAnswer;
+    localStorage.setItem('activeQuestions', JSON.stringify(questionset));
     selectedAnswer = null;
     optionBtns.forEach(b => b.classList.remove('selected'));
 
     currentIndex++;
+    saveprogress(totalTime, currentIndex);
     if (currentIndex < questionset.length) {
         displayQuestion();
     } else {
         // Quiz finished
         localStorage.setItem('activeQuestions', JSON.stringify(questionset));
         window.location.href = 'review.html';
+        localStorage.removeItem('progressSet');
+
     }
 };
 
@@ -107,4 +139,6 @@ const endQuiz = document.getElementById("endQuiz");
 endQuiz.onclick = () => {
     window.location.href = "index.html";
     localStorage.removeItem('activeQuestions');
+    localStorage.removeItem('progressSet');
+
 };
