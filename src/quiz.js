@@ -1,10 +1,13 @@
-// Load questions
+let timerInterval = null;
 const notifyDiv = document.getElementById('notifyDiv')
 const questionset = JSON.parse(localStorage.getItem('activeQuestions'));
 const questionEl = document.getElementById('question');
 const questionNum = document.getElementById('questionNum');
 const optionBtns = document.querySelectorAll('.selection');
 const submitBtn = document.getElementById('submit');
+const skipBtn = document.getElementById('skip');
+const prevBtn = document.getElementById('prev');
+
 const questionCount = questionset.length;
 let timePerQuestion = 30 ; // seconds per question
 let totalTime = questionCount * timePerQuestion; // 1min per question
@@ -47,7 +50,8 @@ function timer() {
     if (typeof progressSet.time === "number" && progressSet.time > 0) {
         totalTime = progressSet.time;
     }
-    const timerInterval = setInterval(() => {
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
         const minutes = Math.floor(totalTime / 60);
         const seconds = totalTime % 60;
         timeDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
@@ -62,7 +66,7 @@ function timer() {
             timeDisplay.textContent = "00:00";
             handleTimeUp();
         }
-    }, 900);
+    }, 1000);
 }
 
 // Handle Time Up
@@ -79,30 +83,34 @@ async function notify(str) {
 // Display a question
 function displayQuestion() {
     const q = questionset[currentIndex];
-    questionNum.textContent = ` Q${currentIndex + 1}.`;
+
+    questionNum.textContent = `Q${currentIndex + 1}.`;
     questionEl.textContent = q.question;
 
-    const saved = q.selectedAnswer;
-    if (saved !== null && saved !== undefined) {
-        optionBtns[saved].classList.add('selected');
-        selectedAnswer = saved;
-        submitBtn.disabled = false;
-    }
+    optionBtns.forEach(b => b.classList.remove('selected'));
+    selectedAnswer = null;
+    submitBtn.disabled = true;
 
     optionBtns.forEach((btn, i) => {
         btn.textContent = q.options[i];
-        btn.classList.remove('selected');
+
         btn.onclick = () => {
             selectedAnswer = i;
-            submitBtn.disabled = false;
-
             optionBtns.forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
+            submitBtn.disabled = false;
         };
     });
 
-    submitBtn.disabled = true;
+    if (q.selectedAnswer !== null && q.selectedAnswer !== undefined) {
+        selectedAnswer = q.selectedAnswer;
+        optionBtns[selectedAnswer].classList.add('selected');
+        submitBtn.disabled = false;
+    }
+
+    prevBtn.disabled = currentIndex === 0;
 }
+
 
 // Handle submit
 submitBtn.addEventListener('click', () => {
@@ -110,7 +118,6 @@ submitBtn.addEventListener('click', () => {
     
     questionset[currentIndex].selectedAnswer = selectedAnswer;
     localStorage.setItem('activeQuestions', JSON.stringify(questionset));
-    selectedAnswer = null;
     optionBtns.forEach(b => b.classList.remove('selected'));
 
     currentIndex++;
@@ -126,9 +133,38 @@ submitBtn.addEventListener('click', () => {
     }
 });
 
-document.onkeydown = (e) => {
-    if (e.key === "Enter" || e.key === "NumpadEnter" || e.key === "ArrowRight") submitBtn.click();
+skipBtn.onclick = () => {
+    if (questionset[currentIndex].selectedAnswer === undefined) {
+        questionset[currentIndex].selectedAnswer = null;
+    }
+
+    currentIndex++;
+    saveprogress(totalTime, currentIndex);
+
+    if (currentIndex < questionset.length) {
+        displayQuestion();
+    } else {
+        localStorage.removeItem('progressSet');
+        window.location.href = 'review.html';
+    }
 };
+
+
+prevBtn.onclick = () => {
+    currentIndex--;
+    saveprogress(totalTime, currentIndex);
+    displayQuestion();
+};
+
+document.addEventListener("keydown", (e) => {
+    if (
+        (e.key === "Enter" || e.key === "NumpadEnter" || e.key === "ArrowRight") &&
+        document.activeElement === document.body
+    ) {
+        submitBtn.click();
+    }
+});
+
 
 
 // Initialize
