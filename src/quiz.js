@@ -105,7 +105,7 @@ function displayQuestion() {
 }
 
 // Handle submit
-submitBtn.onclick = () => {
+submitBtn.addEventListener('click', () => {
     if (selectedAnswer === null) return;
     
     questionset[currentIndex].selectedAnswer = selectedAnswer;
@@ -124,7 +124,7 @@ submitBtn.onclick = () => {
         localStorage.removeItem('progressSet');
 
     }
-};
+});
 
 document.onkeydown = (e) => {
     if (e.key === "Enter" || e.key === "NumpadEnter" || e.key === "ArrowRight") submitBtn.click();
