@@ -238,6 +238,16 @@
   .w-full {
     width: 100%;
   }
+  .border-collapse {
+    border-collapse: collapse;
+  }
+  .resize {
+    resize: both;
+  }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
   .border-b {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
@@ -268,6 +278,9 @@
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
   }
+  .text-wrap {
+    text-wrap: wrap;
+  }
   .text-gray-500 {
     color: var(--color-gray-500);
   }
@@ -279,6 +292,10 @@
   }
   .underline {
     text-decoration-line: underline;
+  }
+  .outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
   }
 }
 body {
@@ -681,7 +698,7 @@ h2 {
   display: grid;
   min-height: 75vh;
   min-width: calc(4/5 * 100%);
-  grid-template-rows: 30px auto 30px;
+  grid-template-rows: 30px auto auto;
   padding-inline: calc(var(--spacing) * 4);
   padding-top: calc(var(--spacing) * 6);
   text-wrap: wrap;
@@ -692,7 +709,7 @@ h2 {
     max-width: calc(3/5 * 100%);
   }
   @media (width >= 48rem) {
-    grid-template-rows: 60px auto 80px;
+    grid-template-rows: 60px auto auto;
   }
 }
 .quiz-container > div {
@@ -808,6 +825,16 @@ h2 {
     color: var(--color-text-muted);
   }
 }
+.quiz-controls {
+  margin-bottom: calc(var(--spacing) * 4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @media (width >= 48rem) {
+    gap: calc(var(--spacing) * 2);
+  }
+}
 .submit {
   margin-bottom: calc(var(--spacing) * 2);
   aspect-ratio: 3/1;
@@ -816,6 +843,96 @@ h2 {
   @media (width >= 48rem) {
     padding: calc(var(--spacing) * 4);
   }
+}
+.quiz-controls > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(var(--spacing) * 0);
+}
+.quiz-nav-btn {
+  border-style: var(--tw-border-style);
+  border-width: 2px;
+  border-color: var(--color-border-glass);
+  background-color: transparent;
+  padding-inline: calc(var(--spacing) * 2);
+  padding-block: calc(var(--spacing) * 1);
+  color: var(--color-text-muted);
+  transition-property: all;
+  transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+  transition-duration: var(--tw-duration, var(--default-transition-duration));
+  --tw-duration: 300ms;
+  transition-duration: 300ms;
+  --tw-ease: var(--ease-out);
+  transition-timing-function: var(--ease-out);
+  &:hover {
+    @media (hover: hover) {
+      --tw-translate-y: calc(var(--spacing) * -0.5);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+  }
+  &:hover {
+    @media (hover: hover) {
+      --tw-scale-x: 101%;
+      --tw-scale-y: 101%;
+      --tw-scale-z: 101%;
+      scale: var(--tw-scale-x) var(--tw-scale-y);
+    }
+  }
+  &:hover {
+    @media (hover: hover) {
+      border-style: var(--tw-border-style);
+      border-width: 4px;
+    }
+  }
+  &:hover {
+    @media (hover: hover) {
+      color: var(--color-text-main);
+    }
+  }
+  @media (width >= 48rem) {
+    padding: calc(var(--spacing) * 3);
+  }
+}
+.quiz-nav-btn:disabled {
+  cursor: not-allowed;
+  opacity: 50%;
+  &:hover {
+    @media (hover: hover) {
+      --tw-translate-y: calc(var(--spacing) * 0);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
+  }
+  &:hover {
+    @media (hover: hover) {
+      --tw-scale-x: 100%;
+      --tw-scale-y: 100%;
+      --tw-scale-z: 100%;
+      scale: var(--tw-scale-x) var(--tw-scale-y);
+    }
+  }
+  &:hover {
+    @media (hover: hover) {
+      border-style: var(--tw-border-style);
+      border-width: 2px;
+    }
+  }
+  &:hover {
+    @media (hover: hover) {
+      color: var(--color-text-muted);
+    }
+  }
+}
+.prev {
+  border-top-left-radius: calc(infinity * 1px);
+  border-bottom-left-radius: calc(infinity * 1px);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.skip {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: calc(infinity * 1px);
+  border-bottom-right-radius: calc(infinity * 1px);
 }
 .quiz-complete {
   display: flex;
@@ -1032,6 +1149,11 @@ h2 {
   syntax: "*";
   inherits: false;
 }
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
 @property --tw-duration {
   syntax: "*";
   inherits: false;
@@ -1150,6 +1272,7 @@ h2 {
     *, ::before, ::after, ::backdrop {
       --tw-border-style: solid;
       --tw-font-weight: initial;
+      --tw-outline-style: solid;
       --tw-duration: initial;
       --tw-ease: initial;
       --tw-translate-x: 0;
