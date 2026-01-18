@@ -9,6 +9,18 @@ const reviewCard = document.querySelector(".review-card");
 const tableBody = document.getElementById("tableBody");
 const reviewTable = document.getElementById("review-table");
 
+const helpBtn = document.getElementById("helpBtn");
+
+helpBtn.onclick = () => {
+    const email = "mailto:alabis372@gmail.com"
+        + "?subject=Quiz%20App%20Feedback%20/%20Bug"
+        + "&body=Hi%20Nazir,%0A%0A"
+        + "I%20found%20a%20bug%20or%20have%20a%20suggestion:%0A%0A";
+
+    window.open(email, "_blank");
+};
+
+
 const questions = JSON.parse(localStorage.getItem('activeQuestions'));
 
 if (!questions) {

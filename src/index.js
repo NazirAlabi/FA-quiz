@@ -4,6 +4,18 @@ let selectedSet = null;
 const setBtns = document.querySelectorAll('.question-set-btn');
 const startBtn = document.getElementById('startQuiz');
 
+const helpBtn = document.getElementById("helpBtn");
+
+helpBtn.onclick = () => {
+    const email = "mailto:alabis372@gmail.com"
+        + "?subject=Quiz%20App%20Feedback%20/%20Bug"
+        + "&body=Hi%20Nazir,%0A%0A"
+        + "I%20found%20a%20bug%20or%20have%20a%20suggestion:%0A%0A";
+
+    window.open(email, "_blank");
+};
+
+
 // Import question sets
 import { set1 } from '../data/set1.js';
 import { set2 } from '../data/set2.js';
