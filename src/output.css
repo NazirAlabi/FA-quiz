@@ -799,7 +799,10 @@ h2 {
   border-radius: 20px;
   font-size: var(--text-xl);
   line-height: var(--tw-leading, var(--text-xl--line-height));
-  color: var(--color-text-main);
+  color: color-mix(in srgb, #f8fafc 70%, transparent);
+  @supports (color: color-mix(in lab, red, red)) {
+    color: color-mix(in oklab, var(--color-text-main) 70%, transparent);
+  }
   @media (width >= 48rem) {
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
