@@ -1,5 +1,6 @@
 let timerInterval = null;
 const notifyDiv = document.getElementById('notifyDiv')
+const quizCard = document.querySelector('.quiz');
 const questionset = JSON.parse(localStorage.getItem('activeQuestions'));
 const questionEl = document.getElementById('question');
 const questionNum = document.getElementById('questionNum');
@@ -95,10 +96,23 @@ function displayQuestion() {
         btn.textContent = q.options[i];
 
         btn.onclick = () => {
-            selectedAnswer = i;
-            optionBtns.forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            submitBtn.disabled = false;
+            if (selectedAnswer === null) {
+                selectedAnswer = i;
+                optionBtns.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                submitBtn.disabled = false;                
+            }
+            else if (selectedAnswer !== i) {
+                optionBtns[selectedAnswer].classList.remove('selected');
+                btn.classList.add('selected');
+                selectedAnswer = i;
+            }
+            else {
+                optionBtns[selectedAnswer].classList.remove('selected');
+                selectedAnswer = null;
+                submitBtn.disabled = true;
+            }
+
         };
     });
 
@@ -111,6 +125,14 @@ function displayQuestion() {
     prevBtn.disabled = currentIndex === 0;
 }
 
+quizCard.addEventListener('click', () => {
+    if (document.activeElement === document.body) {
+        optionBtns.forEach(b => b.classList.remove('selected'));
+        selectedAnswer = null;
+        submitBtn.disabled = true;
+        saveprogress(totalTime, currentIndex);
+    }
+});
 
 // Handle submit
 submitBtn.addEventListener('click', () => {
