@@ -614,6 +614,7 @@ h2 {
 .question-sets {
   display: flex;
   width: 50%;
+  max-width: 80vw;
   flex-direction: column;
   align-items: center;
   justify-content: center;
